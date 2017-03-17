@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Assignment 5, Part 3 - Image Rollovers</title>
+<script>
+var getImage = function(id) {
+  return document.getElementById(id);
+}
+var Rollover = function(imageId, newImageURL) {
+    var target = this;
+    target.newImageURL = newImageURL;
+    target.image = getImage(imageId);
+    target.oldImageURL = this.image.src;
+    
+    //GOOD IDEA HERE BUT IT WON'T WORK. this.image.src ISN'T IN SCOPE YET AS SO IT'S UNDEFINED.
+    //LOOK AT THE CODE ABOVE. FIRST WE TAKE TARGET AND SET IT EQUAL TO THIS. WHAT'S THIS? THE IMAGE
+    //THEN WE CAN ADD PROPERTIES TO THE IMAGE INCLUDING OLDIMAGEURL AND NEWIMAGEURL AND IMAGE
+    //NOW THE SRC IS IN SCOPE AND WE CAN USE IT BELOW
+    /*
+    var target = {
+        newImageURL: newImageURL,
+        image: getImage(imageId),
+        oldImageURL: this.image.src
+    }
+    */
+
+  target.image.onmouseover = function () {
+    //USE THE HTML DOM OBJECT INSTEAD DUDE. EVEN W3 SCHOOLS SAYS TO USE IT INSTEAD OF USING SETATTRIBUTE(): 
+    //https://www.w3schools.com/jsref/met_element_setattribute.asp.
+    //YOU'D HAVE TO USE REMOVEATTRIBUTE() FIRST AND THEN RESET IT IN ORDER FOR THIS TO WORK CORRECTLY.
+    
+    //target.image.setAttribute("src", newImageURL);
+    target.image.src = target.newImageURL; // JUST USE THE HTML DOM OBJECT
+  }
+  target.image.onmouseout = function () {
+    //target.image.setAttribute("src", oldImageURL);
+    target.image.src = target.oldImageURL; // JUST USE THE HTML DOM OBJECT
+  }
+};
+window.onload = function() {
+  var img1 = new Rollover("image1", "home_over.png");
+  var img2 = new Rollover("image2", "aboutus_over.png");
+  var img3 = new Rollover("image3", "solutions_over.png");
+  var img4 = new Rollover("image4", "support_over.png");
+  var img5 = new Rollover("image5", "contactus_over.png");
+}
+</script>
+</head>
+
+<body>
+    <img src="home.png" id="image1">
+    <img src="aboutus.png" id="image2">
+    <img src="solutions.png" id="image3">
+    <img src="support.png" id="image4">
+    <img src="contactus.png" id="image5">
+</body>
+</html>
