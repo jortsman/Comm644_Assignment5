@@ -6,9 +6,10 @@
   <title>Assignment 5, Part 2 - Calculator</title>
   <script>
     window.addEventListener("load", init, false);
+
     function init() {
       var keypad = document.getElementById("keypad");
-      keypad.addEventListener("click", function(click){
+      keypad.addEventListener("click", function(click) {
         click.stopPropagation();
         console.log(click.value);
       })
@@ -18,11 +19,17 @@
         var textBox = document.getElementById("result");
         textBox.value += val;
       };
+
       function calculate() {
         var calc = document.getElementById("result");
         calc.value = eval(calc);
       };
     };
+
+    /* this is as far as I got unfortunely. Ran out of time on this one.
+    I have an answer that another student shared with me as a reference,
+     but I'm not adding it here because it's not mine and I haven't taken the time
+     to understand the code...so I'm keeping it off. */
   </script>
 </head>
 
